@@ -3,7 +3,7 @@
 > **Free, open-source financial calculator for Indian investors.**  
 > Compare LIC insurance premiums against Bank FD/RD and Mutual Fund SIP with true time-weighted IRR, post-tax returns, and liquidity analysis.
 
-🔗 **Live Demo:** [nagarajbhat.github.io/investment-calculator](https://nagarajbhat.github.io/investment-calculator/)
+🔗 **Live Demo:** [nagarajmbhat.github.io/investment-calculator](https://nagarajmbhat.github.io/investment-calculator/)
 
 ---
 
