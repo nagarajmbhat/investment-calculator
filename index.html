@@ -543,26 +543,35 @@
       <!-- Visual Bar Comparison (Post-Tax) -->
       <div class="glass rounded-2xl p-6 sm:p-8 mt-6">
         <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-6">Post-Tax Wealth Comparison</h4>
-        <div class="flex items-end justify-center gap-6 sm:gap-12 h-52">
-          <div class="flex flex-col items-center gap-2 w-24">
-            <span id="barBankLabel" class="text-[11px] font-semibold text-blue-400 text-center">—</span>
-            <div id="barBank" class="w-full rounded-t-xl bg-gradient-to-t from-blue-600 to-blue-400 bar-grow" style="height:0%"></div>
-            <span class="text-[10px] text-slate-500">🏦 Bank FD</span>
+        <!-- Bar chart: fixed 200px container height, bars positioned absolute from bottom -->
+        <div class="relative flex items-end justify-center gap-4 sm:gap-10" style="height:200px">
+          <div class="flex flex-col items-center gap-2 flex-1 max-w-[80px] h-full">
+            <div class="relative flex-1 w-full flex items-end">
+              <div id="barBank" class="w-full rounded-t-xl bg-gradient-to-t from-blue-600 to-blue-400 bar-grow" style="height:0px"></div>
+            </div>
+            <span id="barBankLabel" class="text-[10px] font-semibold text-blue-400 text-center leading-tight">—</span>
+            <span class="text-[9px] text-slate-500 text-center">🏦 Bank FD</span>
           </div>
-          <div class="flex flex-col items-center gap-2 w-24">
-            <span id="barLicLabel" class="text-[11px] font-semibold text-purple-400 text-center">—</span>
-            <div id="barLic" class="w-full rounded-t-xl bg-gradient-to-t from-purple-600 to-purple-400 bar-grow" style="height:0%"></div>
-            <span class="text-[10px] text-slate-500">🛡️ Insurance</span>
+          <div class="flex flex-col items-center gap-2 flex-1 max-w-[80px] h-full">
+            <div class="relative flex-1 w-full flex items-end">
+              <div id="barLic" class="w-full rounded-t-xl bg-gradient-to-t from-purple-600 to-purple-400 bar-grow" style="height:0px"></div>
+            </div>
+            <span id="barLicLabel" class="text-[10px] font-semibold text-purple-400 text-center leading-tight">—</span>
+            <span class="text-[9px] text-slate-500 text-center">🛡️ Insurance</span>
           </div>
-          <div class="flex flex-col items-center gap-2 w-24">
-            <span id="barMfLabel" class="text-[11px] font-semibold text-emerald-400 text-center">—</span>
-            <div id="barMf" class="w-full rounded-t-xl bg-gradient-to-t from-emerald-600 to-emerald-400 bar-grow" style="height:0%"></div>
-            <span class="text-[10px] text-slate-500">📈 MF SIP</span>
+          <div class="flex flex-col items-center gap-2 flex-1 max-w-[80px] h-full">
+            <div class="relative flex-1 w-full flex items-end">
+              <div id="barMf" class="w-full rounded-t-xl bg-gradient-to-t from-emerald-600 to-emerald-400 bar-grow" style="height:0px"></div>
+            </div>
+            <span id="barMfLabel" class="text-[10px] font-semibold text-emerald-400 text-center leading-tight">—</span>
+            <span class="text-[9px] text-slate-500 text-center">📈 MF SIP</span>
           </div>
-          <div class="flex flex-col items-center gap-2 w-24">
-            <span id="barPrincipalLabel" class="text-[11px] font-semibold text-slate-400 text-center">—</span>
-            <div id="barPrincipal" class="w-full rounded-t-xl bg-gradient-to-t from-slate-600 to-slate-400 bar-grow" style="height:0%"></div>
-            <span class="text-[10px] text-slate-500">💵 Principal</span>
+          <div class="flex flex-col items-center gap-2 flex-1 max-w-[80px] h-full">
+            <div class="relative flex-1 w-full flex items-end">
+              <div id="barPrincipal" class="w-full rounded-t-xl bg-gradient-to-t from-slate-600 to-slate-400 bar-grow" style="height:0px"></div>
+            </div>
+            <span id="barPrincipalLabel" class="text-[10px] font-semibold text-slate-400 text-center leading-tight">—</span>
+            <span class="text-[9px] text-slate-500 text-center">💵 Principal</span>
           </div>
         </div>
       </div>
@@ -580,24 +589,24 @@
           <span id="toggleText">Show Details</span>
         </button>
       </div>
-      <div id="tableContainer" class="glass rounded-2xl overflow-hidden hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="bg-slate-800/50 text-slate-400 text-[10px] uppercase tracking-wider">
-                <th class="px-3 py-3 text-left">#</th>
-                <th class="px-3 py-3 text-left">Period</th>
-                <th class="px-3 py-3 text-right">Premium</th>
-                <th class="px-3 py-3 text-right">Remaining</th>
-                <th class="px-3 py-3 text-right">FD FV (₹)</th>
-                <th class="px-3 py-3 text-right">MF FV (₹)</th>
-                <th class="px-3 py-3 text-right">FD Interest</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-          </table>
-        </div>
+      <!-- overflow-x-auto on the outer wrapper prevents page-wide horizontal scroll on mobile -->
+      <div id="tableContainer" class="glass rounded-2xl overflow-x-auto hidden">
+        <table class="w-full text-sm min-w-[520px]">
+          <thead>
+            <tr class="bg-slate-800/50 text-slate-400 text-[10px] uppercase tracking-wider">
+              <th class="px-3 py-3 text-left">#</th>
+              <th class="px-3 py-3 text-left">Period</th>
+              <th class="px-3 py-3 text-right">Premium</th>
+              <th class="px-3 py-3 text-right">Remaining</th>
+              <th class="px-3 py-3 text-right">FD FV (₹)</th>
+              <th class="px-3 py-3 text-right">MF FV (₹)</th>
+              <th class="px-3 py-3 text-right">FD Interest</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
       </div>
+      <p class="text-[11px] text-slate-600 mt-2 sm:hidden">← Scroll table horizontally to see all columns</p>
     </section>
 
     <!-- Divider -->
@@ -934,8 +943,10 @@
         { el: els.barMf, pct: (mfPostTaxWealth / maxVal) * 100, label: els.barMfLabel, val: mfPostTaxWealth },
         { el: els.barPrincipal, pct: (totalInvested / maxVal) * 100, label: els.barPrincipalLabel, val: totalInvested },
       ];
-      bars.forEach(b => { b.el.style.height = '0%'; b.el.classList.remove('bar-grow'); void b.el.offsetWidth; });
-      setTimeout(() => { bars.forEach(b => { b.el.style.height = b.pct + '%'; b.el.classList.add('bar-grow'); }); }, 100);
+      // Use px heights (not %) so bars render correctly inside flex containers
+      const BAR_MAX_PX = 130; // max bar height in pixels
+      bars.forEach(b => { b.el.style.height = '0px'; b.el.classList.remove('bar-grow'); void b.el.offsetWidth; });
+      setTimeout(() => { bars.forEach(b => { b.el.style.height = Math.round((b.pct / 100) * BAR_MAX_PX) + 'px'; b.el.classList.add('bar-grow'); }); }, 100);
       bars.forEach(b => { b.label.textContent = fmt(b.val); });
 
       // ─── Table ─────────────────────────────────────────────────────
