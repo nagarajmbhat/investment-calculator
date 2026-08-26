@@ -67,12 +67,6 @@ open index.html
 ```
 No server, no npm install, no build needed.
 
-### Deploy to GitHub Pages
-1. Fork this repo
-2. Go to **Settings → Pages**
-3. Set Source: `main` branch, `/ (root)` folder
-4. Your URL: `https://YOUR_USERNAME.github.io/investment-calculator/`
-
 ---
 
 ## 🧮 How the Math Works
@@ -130,4 +124,4 @@ MIT License — free to use, modify, and distribute.
 
 ---
 
-*Built with ❤️ by [Hegma Tech](https://github.com/nagarajbhat)*
+*Built with ❤️ by [Nagaraj](https://github.com/nagarajmbhat)*
