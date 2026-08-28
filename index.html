@@ -1410,19 +1410,34 @@
     // 3. Replace 'YOUR_GOATCOUNTER_CODE' below with your actual code
     // 4. Also uncomment the GoatCounter <script> tag in the <head> section
     // ─────────────────────────────────────────────────────────────────────
-    const GC_CODE = 'investment-calculator'; // ← replace this
+    const GC_CODE = 'investment-calculator';
 
     // Fetch visit count from GoatCounter public counter API
-    if (GC_CODE !== 'investment-calculator') {
-      fetch(`https://${GC_CODE}.goatcounter.com/counter//index.html.json`)
+    if (GC_CODE && GC_CODE !== 'YOUR_GOATCOUNTER_CODE') {
+      const path = encodeURIComponent(location.pathname || '/');
+      fetch(`https://${GC_CODE}.goatcounter.com/counter/${path}.json`)
         .then(r => r.json())
         .then(data => {
           const el = document.getElementById('visitCount');
-          if (el && data.count) el.textContent = Number(data.count).toLocaleString('en-IN');
+          if (el && data.count) {
+            const num = parseInt(String(data.count).replace(/,/g, ''), 10);
+            el.textContent = isNaN(num) ? data.count : num.toLocaleString('en-IN');
+          }
         })
-        .catch(() => { });
+        .catch(() => {
+          // Fallback to root path if pathname-specific counter returns error
+          fetch(`https://${GC_CODE}.goatcounter.com/counter//.json`)
+            .then(r => r.json())
+            .then(data => {
+              const el = document.getElementById('visitCount');
+              if (el && data.count) {
+                const num = parseInt(String(data.count).replace(/,/g, ''), 10);
+                el.textContent = isNaN(num) ? data.count : num.toLocaleString('en-IN');
+              }
+            })
+            .catch(() => {});
+        });
     } else {
-      // GoatCounter not configured yet — hide the visits counter gracefully
       const el = document.getElementById('visitCount');
       if (el) el.closest('span') && (el.closest('span').style.display = 'none');
     }
